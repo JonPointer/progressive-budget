@@ -15,6 +15,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/budgetKr',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
+
 
 // mongoose.connect("mongodb://localhost/budget", {
 //   useNewUrlParser: true,
@@ -23,12 +33,12 @@ app.use(express.json());
 //   useCreateIndex: true
 // });
 
-const db = require('./config/keys').mongoURI;
-console.log(db, 'this is the db')
-mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("connected to mongodb succesfully"))
-  .catch(err => console.log(err))
+// const db = require('./config/keys').mongoURI;
+// console.log(db, 'this is the db')
+// mongoose
+//   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => console.log("connected to mongodb succesfully"))
+//   .catch(err => console.log(err))
 
 
 app.use(express.static(path.join(__dirname, 'public')));
